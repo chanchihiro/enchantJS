@@ -17,12 +17,7 @@ hoverすると青く2倍になる
 */
 
 h1{
-	color:red;
-	transition:200ms ease-out transform;
-	&:hover{
-		color: #000;
-		transform:translate(10px,0);
-	}
+	color: red;
 }
 body{
 	background-color: #fff;

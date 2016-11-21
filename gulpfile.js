@@ -4,13 +4,13 @@ var autoprefixer = require("gulp-autoprefixer"); //弁ダープレフィック�
 var frontnote = require("gulp-frontnote"); //スタイルガイドの作成
 var uglify = require("gulp-uglify"); //jsの圧縮
 var browser = require("browser-sync"); //ライブリロード
-var plumber = require("gulp-plumber");
-var jade = require("gulp-jade");
+var plumber = require("gulp-plumber"); //途中で実行をやめてしまうのをやめる
+var jade = require("gulp-jade"); //jadeのコンパイル
 
 gulp.task("server",function(){
 	browser({
 		server:{
-			baseDir:"./"
+			baseDir:"./public"
 		}
 	});
 });
@@ -39,11 +39,11 @@ gulp.task("js",function(){
 
 gulp.task("jade",function(){
 	gulp.src("src/views/*.jade")
-	.pipe(plumber())
-	.pipe(jade({
-		pretty:true
-	}))
-	.pipe(gulp.dest("public/html"));
+		.pipe(plumber())
+		.pipe(jade({
+			pretty:true
+		}))
+		.pipe(gulp.dest("./public"));
 	browserSync.reload();
 });
 
@@ -52,4 +52,7 @@ gulp.task("default",["server"],function(){
 	gulp.watch("src/js/*.js",["js"]);
 	gulp.watch("src/styles/*.scss",["sass"]);
 	gulp.watch("src/views/*.jade",["jade"]);
+	gulp.watch("public/**",function(){
+		browserSync.reload();
+	});
 });
