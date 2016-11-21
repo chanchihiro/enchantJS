@@ -6,6 +6,7 @@ var uglify = require("gulp-uglify"); //jsの圧縮
 var browser = require("browser-sync"); //ライブリロード
 var plumber = require("gulp-plumber"); //途中で実行をやめてしまうのをやめる
 var jade = require("gulp-jade"); //jadeのコンパイル
+var frontNote = require('gulp-frontnote'); //スタイルガイドの作成
 
 gulp.task("server",function(){
 	browser({
@@ -14,6 +15,12 @@ gulp.task("server",function(){
 		}
 	});
 });
+
+
+gulp.src('public/**/*.css')
+.pipe(frontNote({
+// options
+}));
 
 
 gulp.task("sass",function(){
@@ -25,7 +32,7 @@ gulp.task("sass",function(){
 		.pipe(sass())
 		.pipe(autoprefixer())
 		.pipe(gulp.dest("public/css"));
-	browserSync.reload();
+	browser.reload();
 });
 
 
@@ -34,7 +41,7 @@ gulp.task("js",function(){
 		.pipe(plumber())
 		.pipe(uglify())
 		.pipe(gulp.dest("public/js"));
-	browserSync.reload();
+	browser.reload();
 });
 
 gulp.task("jade",function(){
@@ -44,7 +51,7 @@ gulp.task("jade",function(){
 			pretty:true
 		}))
 		.pipe(gulp.dest("./public"));
-	browserSync.reload();
+	browser.reload();
 });
 
 
@@ -53,6 +60,6 @@ gulp.task("default",["server"],function(){
 	gulp.watch("src/styles/*.scss",["sass"]);
 	gulp.watch("src/views/*.jade",["jade"]);
 	gulp.watch("public/**",function(){
-		browserSync.reload();
+		browser.reload();
 	});
 });
