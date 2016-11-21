@@ -15,8 +15,12 @@ hoverすると青く2倍になる
 <h1>見出し1</h1>
 ```
 */
+* {
+  margin: 0;
+  padding: 0; }
+
 h1 {
-  color: red; }
+  color: #000; }
 
 body {
   background-color: #fff; }

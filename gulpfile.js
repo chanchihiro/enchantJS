@@ -1,4 +1,5 @@
 var gulp = require("gulp");
+var babel = require("gulp-babel");
 var sass = require("gulp-sass"); //sassのコンパイル
 var autoprefixer = require("gulp-autoprefixer"); //弁ダープレフィックスつける
 var frontnote = require("gulp-frontnote"); //スタイルガイドの作成
@@ -7,6 +8,16 @@ var browser = require("browser-sync"); //ライブリロード
 var plumber = require("gulp-plumber"); //途中で実行をやめてしまうのをやめる
 var jade = require("gulp-jade"); //jadeのコンパイル
 var frontNote = require('gulp-frontnote'); //スタイルガイドの作成
+
+
+gulp.task('babel', function() {
+	gulp.src('./src/js/*.js')
+		.pipe(babel())
+		.pipe(plumber())
+		.pipe(gulp.dest('public/js'));
+	browser.reload();
+});
+
 
 gulp.task("server",function(){
 	browser({
@@ -18,8 +29,8 @@ gulp.task("server",function(){
 
 
 gulp.src('public/**/*.css')
-.pipe(frontNote({
-// options
+	.pipe(frontNote({
+	// options
 }));
 
 
@@ -36,13 +47,14 @@ gulp.task("sass",function(){
 });
 
 
-gulp.task("js",function(){
-	gulp.src("src/js/*.js")
-		.pipe(plumber())
-		.pipe(uglify())
-		.pipe(gulp.dest("public/js"));
-	browser.reload();
-});
+// gulp.task("js",function(){
+// 	gulp.src("src/js/*.js")
+// 		.pipe(plumber())
+// 		.pipe(uglify())
+// 		.pipe(gulp.dest("public/js"));
+// 	browser.reload();
+// });
+
 
 gulp.task("jade",function(){
 	gulp.src("src/views/*.jade")
@@ -55,10 +67,11 @@ gulp.task("jade",function(){
 });
 
 
-gulp.task("default",["server"],function(){
-	gulp.watch("src/js/*.js",["js"]);
+gulp.task("default",["server","babel"],function(){
+	// gulp.watch("src/js/*.js",["js"]);
 	gulp.watch("src/styles/*.scss",["sass"]);
 	gulp.watch("src/views/*.jade",["jade"]);
+	gulp.watch("src/js/*.js",["babel"]);
 	gulp.watch("public/**",function(){
 		browser.reload();
 	});

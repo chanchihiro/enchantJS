@@ -1,4 +1,6 @@
-var bar = () => {
+"use strict";
+
+var bar = function bar() {
   console.log("ばか");
 };
 
