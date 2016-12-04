@@ -1,3 +1,5 @@
-const BLACK = '#000000',
-      WHITE = '#ffffff',
-      red = "#990000";
+enchant();
+
+window.onload = () =>{
+	console.log("hello");
+};

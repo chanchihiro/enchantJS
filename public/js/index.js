@@ -1,5 +1,7 @@
-'use strict';
+"use strict";
 
-var BLACK = '#000000',
-    WHITE = '#ffffff',
-    red = "#990000";
+enchant();
+
+window.onload = function () {
+	console.log("hello");
+};
