@@ -1,7 +1,1 @@
-"use strict";
-
-var bar = function bar() {
-  console.log("ばか");
-};
-
-console.log("yes");
+"use strict";var BLACK="#000000",WHITE="#ffffff";

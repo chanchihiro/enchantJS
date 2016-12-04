@@ -11,7 +11,7 @@ var frontNote = require('gulp-frontnote'); //スタイルガイドの作成
 
 
 gulp.task('babel', function() {
-	gulp.src('./src/js/*.js')
+	gulp.src('./src/js/*.es6')
 		.pipe(babel())
 		.pipe(plumber())
 		.pipe(gulp.dest('public/js'));
@@ -71,7 +71,7 @@ gulp.task("default",["server","babel"],function(){
 	// gulp.watch("src/js/*.js",["js"]);
 	gulp.watch("src/styles/*.scss",["sass"]);
 	gulp.watch("src/views/*.jade",["jade"]);
-	gulp.watch("src/js/*.js",["babel"]);
+	gulp.watch("src/js/*.es6",["babel"]);
 	gulp.watch("public/**",function(){
 		browser.reload();
 	});
