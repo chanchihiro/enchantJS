@@ -1,4 +1,5 @@
 'use strict';
 
 var BLACK = '#000000',
-    WHITE = '#ffffff';
+    WHITE = '#ffffff',
+    red = "#990000";

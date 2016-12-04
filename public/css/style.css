@@ -1,26 +1,30 @@
-@charset "UTF-8";
-/*
-#overview
-スタイルガイド
- 
-サンプルファイルです
-*/
-/*#styleguide
-サンプル見出し1
- 
-サンプルの見出しスタイル
-hoverすると青く2倍になる
- 
-```
-<h1>見出し1</h1>
-```
-*/
+@font-face {
+  font-family: mc-l;
+  src: url(../../../public/font/mplus-1m-light.ttf) format("opentype"); }
+
+@font-face {
+  font-family: mc-b;
+  src: url(../../../public/font/mplus-1m-bold.ttf) format("opentype"); }
+
+@font-face {
+  font-family: mc-r;
+  src: url(../../../public/font/mplus-1m-regular.ttf) format("opentype"); }
+
+@font-face {
+  font-family: mc-t;
+  src: url(../../../public/font/mplus-1m-thin) format("opentype"); }
+
+@font-face {
+  font-family: mc-m;
+  src: url(../../../public/font/mplus-1m-medium.ttf) format("opentype"); }
+
 * {
   margin: 0;
   padding: 0; }
 
 h1 {
-  color: #000; }
+  font-weight: normal;
+  color: #fff; }
 
 body {
   background-color: #fff; }

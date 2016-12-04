@@ -1,20 +1,6 @@
-/*
-#overview
-スタイルガイド
- 
-サンプルファイルです
-*/
- 
-/*#styleguide
-サンプル見出し1
- 
-サンプルの見出しスタイル
-hoverすると青く2倍になる
- 
-```
-<h1>見出し1</h1>
-```
-*/
+//ファイルのインポート
+@import "lib/base";
+
 
 *{
 	margin: 0;
@@ -22,7 +8,8 @@ hoverすると青く2倍になる
 }
 
 h1{
-	color: #000;
+	font-weight: normal;
+	color: $white;
 }
 body{
 	background-color: #fff;
