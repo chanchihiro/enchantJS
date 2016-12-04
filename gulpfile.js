@@ -28,7 +28,7 @@ gulp.task("server",function(){
 });
 
 
-gulp.src('public/**/*.css')
+gulp.src('public/**/guide.css')
 	.pipe(frontNote({
 	// options
 }));
