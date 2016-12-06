@@ -7,28 +7,24 @@ window.onload = () => {
 	core.fps = 10;
 	core.onload = () => {
 
-		let bear = new Sprite(32,32);
-		bear.image = core.assets["../img/chara1.png"];
-		bear.x = 0;
-		bear.y = 0;
-		bear.frame = 1;
-
-		//始まった時func
-		bear.addEventListener("enterframe",() => {
-			if (core.input.left) bear.x -= 5;
-			if (core.input.right) bear.x += 5;
-			if (core.input.up) bear.y -= 5;
-			if (core.input.down) bear.y += 5;
-			if (bear.within(enemy, 16)){
-				core.pushScene(gameoverScene);
-				core.stop();
+		class Bears extends Sprite {
+			constructor(x,y,z){
+				super(32,32);
+				this.x = x;
+				this.y = y;
+				this.frame = z;
+				this.image = core.assets["../img/chara1.png"];
+				core.rootScene.addChild(this);
 			}
-		});
-
-		//何かをタッチしてfunc
-		bear.on("touchstart", () => {
-			core.rootScene.removeChild(bear);
-		})
+			move() {
+				this.on("enterframe", () => {
+					if (core.input.left) this.x -= 5;
+					if (core.input.right) this.x += 5;
+					if (core.input.up) this.y -= 5;
+					if (core.input.down) this.y += 5;
+				});
+			}
+		}
 
 
 		let enemy = new Sprite(32,32);
@@ -65,16 +61,18 @@ window.onload = () => {
 		}
 
 
-		let white = new Bear(0,50);
 
 
 		let gameoverScene = new Scene();
 		gameoverScene.backgroundColor = "black";
 
 
-		core.rootScene.addChild(bear);
+		// core.rootScene.addChild(bear);
 		core.rootScene.addChild(label);
 		core.rootScene.addChild(enemy);
+		let white = new Bears(0,0,5);
+		white.move();
+		let black = new Bear(0,50);
 	}
 	core.start();
 };
