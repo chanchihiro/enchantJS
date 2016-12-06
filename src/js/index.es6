@@ -52,10 +52,20 @@ window.onload = () => {
 
 		class Bear extends Sprite {
 			constructor(x,y){
-				Sprite.call(this,32,32);
-			},
-			
+				super(32,32);
+				this.x = x;
+				this.y = y;
+				this.image = core.assets["../img/chara1.png"];
+				this.on("enterframe", () => {
+					this.x += 5;
+					if ( this.x > 320 ) this.x = 0;
+				});
+				core.rootScene.addChild(this);
+			}
 		}
+
+
+		let white = new Bear(0,50);
 
 
 		let gameoverScene = new Scene();
