@@ -19,6 +19,10 @@ window.onload = () => {
 			if (core.input.right) bear.x += 5;
 			if (core.input.up) bear.y -= 5;
 			if (core.input.down) bear.y += 5;
+			if (bear.within(enemy, 16)){
+				core.pushScene(gameoverScene);
+				core.stop();
+			}
 		});
 
 		//何かをタッチしてfunc
@@ -26,7 +30,41 @@ window.onload = () => {
 			core.rootScene.removeChild(bear);
 		})
 
+
+		let enemy = new Sprite(32,32);
+		enemy.image = core.assets["../img/chara1.png"];
+		enemy.x = 100;
+		enemy.y = 0;
+		enemy.frame = 5;
+
+
+		let label = new Label();
+		label.x = 200;
+		label.y = 5;
+		label.color = "red";
+		label.font = "3px";
+		label.text = "0"
+
+		label.on("enterframe", () => {
+			label.text = ( core.frame / core.fps ).toFixed(1);
+		})
+
+
+		class Bear extends Sprite {
+			constructor(x,y){
+				Sprite.call(this,32,32);
+			},
+			
+		}
+
+
+		let gameoverScene = new Scene();
+		gameoverScene.backgroundColor = "black";
+
+
 		core.rootScene.addChild(bear);
+		core.rootScene.addChild(label);
+		core.rootScene.addChild(enemy);
 	}
 	core.start();
 };
