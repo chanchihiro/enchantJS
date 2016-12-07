@@ -4,10 +4,10 @@ window.onload = () => {
 
 	let core = new Core(320,320);
 	core.preload("../img/chara1.png");
-	core.fps = 10;
+	core.fps = 20;
 	core.onload = () => {
 
-		class Bears extends Sprite {
+		class Bear extends Sprite {
 			constructor(x,y,z){
 				super(32,32);
 				this.x = x;
@@ -46,21 +46,31 @@ window.onload = () => {
 		})
 
 
-		class Bear extends Sprite {
+		class Bears extends Sprite {
 			constructor(x,y){
 				super(32,32);
 				this.x = x;
 				this.y = y;
+				this.frame = rand(8);
 				this.image = core.assets["../img/chara1.png"];
-				this.on("enterframe", () => {
-					this.x += 5;
-					if ( this.x > 320 ) this.x = 0;
-				});
+				this.tl.moveBy(rand(100),0,40,enchant.Easing.BOUNCE_EASEOUT)
+					   .moveBy(-rand(100),0,40)
+					   .fadeOut(20)
+					   .fadeIn(10)
+					   .loop();
 				core.rootScene.addChild(this);
 			}
 		}
 
 
+		let rand = n => {
+			return Math.floor(Math.random() * n+1);
+		}
+
+		let bearing = [];
+		for (let i = 0; i < 100; i++){
+			bearing[i] = new  Bears(rand(320),rand(320));
+		}
 
 
 		let gameoverScene = new Scene();
@@ -70,9 +80,9 @@ window.onload = () => {
 		// core.rootScene.addChild(bear);
 		core.rootScene.addChild(label);
 		core.rootScene.addChild(enemy);
-		let white = new Bears(0,0,5);
+		let white = new Bear(0,0,5);
 		white.move();
-		let black = new Bear(0,50);
+		let black = new Bears(0,50);
 	}
 	core.start();
 };

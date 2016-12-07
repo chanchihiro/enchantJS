@@ -14,15 +14,15 @@ window.onload = function () {
 
 	var core = new Core(320, 320);
 	core.preload("../img/chara1.png");
-	core.fps = 10;
+	core.fps = 20;
 	core.onload = function () {
-		var Bears = function (_Sprite) {
-			_inherits(Bears, _Sprite);
+		var Bear = function (_Sprite) {
+			_inherits(Bear, _Sprite);
 
-			function Bears(x, y, z) {
-				_classCallCheck(this, Bears);
+			function Bear(x, y, z) {
+				_classCallCheck(this, Bear);
 
-				var _this = _possibleConstructorReturn(this, (Bears.__proto__ || Object.getPrototypeOf(Bears)).call(this, 32, 32));
+				var _this = _possibleConstructorReturn(this, (Bear.__proto__ || Object.getPrototypeOf(Bear)).call(this, 32, 32));
 
 				_this.x = x;
 				_this.y = y;
@@ -32,7 +32,7 @@ window.onload = function () {
 				return _this;
 			}
 
-			_createClass(Bears, [{
+			_createClass(Bear, [{
 				key: "move",
 				value: function move() {
 					var _this2 = this;
@@ -46,7 +46,7 @@ window.onload = function () {
 				}
 			}]);
 
-			return Bears;
+			return Bear;
 		}(Sprite);
 
 		var enemy = new Sprite(32, 32);
@@ -66,27 +66,34 @@ window.onload = function () {
 			label.text = (core.frame / core.fps).toFixed(1);
 		});
 
-		var Bear = function (_Sprite2) {
-			_inherits(Bear, _Sprite2);
+		var Bears = function (_Sprite2) {
+			_inherits(Bears, _Sprite2);
 
-			function Bear(x, y) {
-				_classCallCheck(this, Bear);
+			function Bears(x, y) {
+				_classCallCheck(this, Bears);
 
-				var _this3 = _possibleConstructorReturn(this, (Bear.__proto__ || Object.getPrototypeOf(Bear)).call(this, 32, 32));
+				var _this3 = _possibleConstructorReturn(this, (Bears.__proto__ || Object.getPrototypeOf(Bears)).call(this, 32, 32));
 
 				_this3.x = x;
 				_this3.y = y;
+				_this3.frame = rand(8);
 				_this3.image = core.assets["../img/chara1.png"];
-				_this3.on("enterframe", function () {
-					_this3.x += 5;
-					if (_this3.x > 320) _this3.x = 0;
-				});
+				_this3.tl.moveBy(rand(100), 0, 40, enchant.Easing.BOUNCE_EASEOUT).moveBy(-rand(100), 0, 40).fadeOut(20).fadeIn(10).loop();
 				core.rootScene.addChild(_this3);
 				return _this3;
 			}
 
-			return Bear;
+			return Bears;
 		}(Sprite);
+
+		var rand = function rand(n) {
+			return Math.floor(Math.random() * n + 1);
+		};
+
+		var bearing = [];
+		for (var i = 0; i < 100; i++) {
+			bearing[i] = new Bears(rand(320), rand(320));
+		}
 
 		var gameoverScene = new Scene();
 		gameoverScene.backgroundColor = "black";
@@ -94,9 +101,9 @@ window.onload = function () {
 		// core.rootScene.addChild(bear);
 		core.rootScene.addChild(label);
 		core.rootScene.addChild(enemy);
-		var white = new Bears(0, 0, 5);
+		var white = new Bear(0, 0, 5);
 		white.move();
-		var black = new Bear(0, 50);
+		var black = new Bears(0, 50);
 	};
 	core.start();
 };
